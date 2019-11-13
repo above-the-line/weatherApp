@@ -1,0 +1,661 @@
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* MAIN STYLE RULES  
+   Minimum sized screen is iPhone5 SE (320x568). 
+   Current styling is not backwards compatible.  
+   Optimal experience on Google Chrome 74+ 
+   Not THAT ugly on other browsers.
+   Works on: Opera 55+ 
+             Firefox 66+ 
+             Safari 12.1+  
+             Edge 44+ 
+             IE 11 
+    */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+
+/* LOADING SCREEN */
+/*  */
+/*  */
+/* Container */
+#loadingContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('https://bit.ly/webApp_Assets_background');
+  background-size: cover;
+  height:100vh;
+  width: 100vw;
+}
+#loadingMessageContainer{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#loadingMessage{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-self: center;
+  font-family: sans-serif;
+  font-weight: 200;
+  color: white;
+  padding-top: 125px;
+}
+  
+
+/* LOADING CIRCLE */
+/*  */
+/*  */
+
+#loadingCircleContainer{
+  display: inline;
+  position: absolute;
+  top: 10vh;
+  min-height:200px;
+}
+
+#semiCircleContainer{
+  display: inline-block;
+  width: 100px;
+  height: 200px;
+  float: left;
+  overflow: hidden;
+}
+
+#leftSemiCircle, #rightSemiCircle{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  animation: rotate 5s linear infinite;
+}
+
+#loadingSemiCircle{
+  position: absolute;
+  border-radius: 50%;
+  width: 200%;
+  height: 100%;
+  box-shadow: inset 0 0 0 6px #ffffff
+}
+
+/* descendant combinator (no comma) 
+select the loadingSemiCircle within the Right SemiCircle id*/
+#rightSemiCircle #loadingSemiCircle{
+  right: 0px !important;
+}
+
+#leftSemiCircle{
+  transform-origin: 100% 50%;
+}
+
+#rightSemiCircle{
+  transform-origin: 0% 50%;  
+}
+
+@keyframes rotate{
+  0%    {transform: rotate(0deg);}
+  100%  {transform: rotate(360deg);}
+}
+
+
+/* MAIN APP - SLIDER AND SLIDES */
+/*  */
+/*  */
+/* Font Weights */
+#targetCityName{
+  font-weight: 300; 
+}
+
+.todaysCurrentTempBox{
+  font-weight: 300;
+}
+
+.fiveDayForecast{
+  font-weight: 250;
+}
+
+/*  */
+/*  */
+/* Positioning System */
+.main-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('https://bit.ly/webApp_Assets_background');
+  background-size: cover;
+  font-family: sans-serif;
+  font-size: 30px;
+  min-width: 320px;
+  min-height: 580px;
+  overflow: hidden;
+}
+
+/* #targetCityCarousel{
+  display: none;
+} */
+
+.carousel-item{ 
+  min-height: 568px;
+  min-width: 320px;
+  height: 100vh;
+}
+
+#targetCitySlideContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 1060px;
+}
+
+#todaysStats{
+  height: 51%;
+  min-height: 245px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fiveDayForecast{
+  height: 37.3%;
+}
+
+.todaysCurrentTempBox{
+  font-size: 50px;
+  justify-self: flex-end;
+}
+
+#targetCityDisplayContainer{
+  height: 90vh;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: center;
+  z-index:2 !important;
+}
+
+/*  */
+/*  */
+/* Overriding bootstrap */
+.carousel-caption{
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: space-around;
+  align-items: stretch;
+  right: 0px !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  height: 100%;
+  max-height: 1500px;
+}
+
+#targetCityNameContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/*  */
+/*  */
+/* Todays Current Icon */
+#targetCityIcon{
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#todaysIcon{
+  width: 125px;
+}
+
+.weather-icon{
+  filter: brightness(0) invert(1);
+}
+
+/*  */
+/*  */
+/* Todays Temperature Layout */
+#todaysNumbersAndText{
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.todaysCurrentTempBox{
+  font-size: 38px;
+}
+
+.todaysCurrentTempControlBox{
+  width: 1.6em;
+  height: 1.3em;  
+  display: inline-flex;
+  position: relative;
+  left: 0.3em;
+}
+
+#todaysCurrentTempNumber{
+  float: left;
+}
+
+.todaysCurrentTempDegreesCelsius{
+  float: right;
+  font-size: 0.5em;
+}
+
+.todaysLowTempHighTempBox{
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.lowTempHighTempControlBox{
+  width: 4.5em;
+  height: 1em;
+  display: inline-flex;
+  justify-content: space-around;
+  min-width: 90px;
+  min-height: 15px;
+  font-size: 15px;
+}
+
+.todaysLowTempBox{
+  width: 1.6em;
+  height: 1.3em;
+  display: inline-flex;
+}
+
+#todaysLowTempNumber{
+  float: left;
+}
+
+.todaysLowTempDegreesCelsius{
+  float: right;
+  font-size: 0.6em;
+}
+
+.todaysHighTempBox{
+  width: 1.6em;
+  height: 1.3em;
+  display: inline-flex;
+}
+
+.todaysHighTempNumber{
+  float: left;
+}
+
+.todaysHighTempDegreesCelsius{
+  float: right;
+  font-size: 0.6em;
+}
+
+.lowTempHighTempBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.lowTempHighTempBoxFiveDay{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+#todaysDescription{
+  padding-top: 9px;
+}
+
+.line{
+  justify-self: flex-end;
+  align-self: center;
+}
+
+line{
+  display: inline-block;
+  align-self: center;
+  height: 0.2vh;
+  min-height: 2px;
+  width: 90vw;
+  min-width: 288px;
+  background-color: #eae4e447;
+}
+
+/*  */
+/*  */
+/* FIVE DAY FORECAST */
+.fiveDayForecast{
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
+.dayPlus{
+  padding: 3px;
+  padding-bottom: 1px;
+  padding-top: 12px;
+}
+
+.fiveDayImages{
+  width: 60px;
+}
+
+@-moz-document url-prefix() {
+  .fiveDayImages{
+    width: 60px;
+  }
+}
+
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.carousel-control-prev-icon {
+  background-image: url('https://bit.ly/webApp_Assets_leftArrow') !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url('https://bit.ly/webApp_Assets_rightArrow') !important;
+}
+
+.carousel-control-prev, .carousel-control-next{
+  height: 56% !important;
+  width: 32% !important;
+  min-height: 289px;
+  min-width: 76px;
+  z-index: 1000 !important;
+}
+
+.carousel-controls{
+  position:relative; 
+  width:300px;
+  margin:0 auto;
+}
+ 
+.carousel-indicators{
+  visibility: hidden;
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* SCREEN SPECIFIC STYLING */
+/* A few minor adjustments made for flagship phones and tablets */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+/*  */
+/*  */
+@media only screen and (max-width: 374px){
+  #targetCityName{
+    font-size: 1em;
+  } 
+  
+  #todaysCurrentTemp{
+    font-size: 1.4em;
+  }
+
+  .lowTempHighTempBoxFiveDay, .lowTempHighTempBox{
+    font-size: 25px;
+  }
+
+  #todaysLow, #todaysHigh{
+    font-size: 0.5em;
+  }
+
+  .dayPlusName, #todaysDescription, .todaysLowHighFiveDay{
+    font-size: 0.75rem;
+  }
+  
+  #fiveDayForecast, .fiveDayForecast{
+    font-size: 20px
+  }
+  
+  .fiveDayImages{
+    width: 35px;
+  }
+
+  #todayPlusFive{
+    margin-right: 1.5em;
+  }  
+
+  #todayPlusFour{
+    margin-left: 1.5em;
+  }
+}
+
+/*  */
+/*  */
+@media only screen and (min-width: 375px){
+  #targetCityName{
+    font-size: 1em;
+  } 
+  
+  #todaysCurrentTemp{
+    font-size: 1.4em;
+  }
+
+  .lowTempHighTempBoxFiveDay, .lowTempHighTempBox{
+    font-size: 25px;
+  }
+
+  #todaysLow, #todaysHigh{
+    font-size: 0.5em;
+  }
+
+  .dayPlusName, #todaysDescription, .todaysLowHighFiveDay{
+    font-size: 0.75rem;
+  }
+  
+  #fiveDayForecast, .fiveDayForecast{
+    font-size: 20px
+  }
+  
+  .fiveDayImages{
+    width: 35px;
+  }
+
+  #todayPlusFive{
+    margin-right: 1.5em;
+  }  
+
+  #todayPlusFour{
+    margin-left: 1.5em;
+  }
+
+}
+
+/*  */
+/*  */
+@media only screen and (min-width: 375px) and (min-height:580px){
+  .fiveDayImages{
+    width: 37px;
+  }
+  
+  .dayPlus{
+    padding: 9px;
+    padding-bottom: 1px;
+    padding-top: 12px;
+  }
+
+.fiveDayForecast{
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+
+}
+
+/*  */
+/*  */
+@media only screen and (min-width: 375px) and (min-height:812px){
+  #targetCityName{
+    font-size: 1.4em;
+  }
+
+  #todaysStats{
+    justify-content: space-around;
+  }
+
+.dayPlus{
+  padding: 0;
+  padding-bottom: 0px;
+  padding-top: 0;
+}
+
+  #todaysIcon{
+    width:167px;
+  }
+
+  .lowTempHighTempControlBox{
+    font-size: 21px;
+    font-weight: 100px;
+    width: 6.5em
+  }
+
+  .dayPlusName, #todaysDescription, .todaysLowHighFiveDay{
+    font-size: 1rem;
+    font-weight: 100px;
+  }
+
+  #todaysDescription{
+    padding-top: 21px;
+  }
+
+  .fiveDayImages{
+    width: 57px;
+    padding: 0px;
+  }
+}
+
+/*  */
+/*  */
+/* Tablets */
+/*  */
+/*  */
+@media only screen and (min-width: 768px) and (min-height: 922px){
+  #todaysIcon{
+    width: 200px;
+  }
+
+  #todaysIcon{
+    width: 200px;
+  }
+
+  #targetCityName{
+    font-size: 2em;
+  } 
+  
+  .todaysCurrentTempBox{
+    font-size: 77px;
+  }
+  
+  .lowTempHighTempControlBox{
+    font-size: 30px;
+  }
+
+  .dayPlusName, #todaysDescription, .todaysLowHighFiveDay{
+    font-size: 1.7rem;
+  }
+  
+  .fiveDayImages {
+    width: 80px;
+    padding: 5px;
+}
+
+  .fiveDayForecast {
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+  line{
+    width: 68px;
+  }
+
+  #todaysStats{
+    min-height: 325px;
+    height: 90%;
+    justify-content: space-around;
+  }
+
+  .fiveDayForecast{
+    height: 26%;
+  }
+
+  #todaysNumbersAndText{
+    height: 45%;
+    margin-top: -6%;
+  }
+}
+
+
+/*  */
+/*  */
+/* Handling non generic screen sizes */
+/*  */
+/*  */
+@media only screen and (min-width: 349px){
+  #todayPlusFive{
+    margin-right: 0em;
+  }  
+
+  #todayPlusFour{
+    margin-left: 0em;
+  }
+
+} 
+
+@media only screen and (min-width: 520px){
+  line{
+    width: 60vw;
+    max-width: 545px;
+  }
+}
+
+@media only screen and (max-height:626px){
+  line{
+    margin-top: 71px;
+  }
+}
+
+@media only screen and (min-width: 744px){
+  .carousel-control-prev, .carousel-control-next{
+    width: 50% !important;
+  }
+}
+
+@media only screen and (min-height: 1197px){
+  #todaysIcon {
+    width: unset;
+}
+}

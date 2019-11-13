@@ -1,0 +1,173 @@
+<!-- 
+  There is some mixing of concerns in this project: JS libraries are imported here
+  in the HTML document, but depended on files elsewhere by the javascript file. 
+  
+  This markup creates a Twitter Bootstrap Carousel with three "HTML injection targets"
+  into which the javascript injects a dynamically created HTML payload.
+
+  Target cities are held in the javascript at runtime, there is currently no user
+  interaction, as it was not a design requirement.
+
+  Traffic is not secure. So that the app works on third party cloud IDEs, 
+  API calls made with Cross-Origin Resource Sharing.
+  -->
+
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather Application</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="/main.css">
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div id="loadingContainer">
+    <div id="loadingCircleContainer">
+      <div id="semiCircleContainer">
+        <div id="leftSemiCircle">
+          <div id="loadingSemiCircle"></div>
+        </div>
+      </div>
+      <div id="semiCircleContainer">
+        <div id="rightSemiCircle">
+          <div id="loadingSemiCircle"></div>
+        </div>
+      </div>
+    </div>
+    <div id="loadingMessageContainer">
+      <div id="loadingMessage"></div>
+    </div>
+  </div>
+  <div class="main-container" id="slider">
+    <div id="targetCityCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+      <ol class="carousel-indicators" id="JSinjectionTargetSlideIndicator">
+        <li data-target="#targetCityCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#targetCityCarousel" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner" id="JSinjectionTargetSlideMountPoint">
+        <!--ONE CAROUSEL SLIDE = CAROUSEL ITEM-->
+        <div class="carousel-item active" id="JSinjectionTargetSlideCreationPoint">
+          <div class="carousel-caption">
+            <div id="targetCitySlideContainer"> 
+              <div id="targetCityDisplayContainer">
+                <div id="todaysStats"> 
+                  <div id="targetCityNameContainer">
+                    <div id="targetCityName">City Name</div>
+                  </div>
+                  <div id="targetCityIcon">
+                    <img class="weather-icon" id="todaysIcon" src="https://bit.ly/webApp_Assets_cloudy"></img>
+                  </div>
+                  <div id="todaysNumbersAndText">
+                      <div class="todaysCurrentTempBox">
+                        <div class="todaysCurrentTempControlBox">
+                          <div id="todaysCurrentTempNumber">00</div>
+                          <div class="todaysCurrentTempDegreesCelsius">º</div>
+                        </div>
+                      </div>
+                      <div class="todaysLowTempHighTempBox">
+                        <div class="lowTempHighTempControlBox">
+                          <div class=todaysLowTempBox>
+                            <div id="todaysLowTempNumber">-00</div>
+                            <div class="todaysLowTempDegreesCelsius">º</div>
+                          </div>
+                          <div class=todaysHighTempBox>
+                            <div id="todaysHighTempNumber">+00</div>
+                            <div class="todaysHighTempDegreesCelsius">º</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="todaysDescription">Today's Description</div>
+                  </div>
+                </div> <!--todaysStats--> 
+                <div class="line">
+                <line></line>
+                </div> <!--line--> 
+                <div class="fiveDayForecast" id="fiveDayForecast">
+                  <div class="dayPlus" id="todayPlusOne">
+                    <div class="dayPlusName" id="dayPlusOne">Day1</div>
+                    <img class="weather-icon fiveDayImages" id="todayPlusOneIcon" src="https://bit.ly/webApp_Assets_cloudy">
+                    <div class="lowTempHighTempBoxFiveDay">
+                      <div class="todaysLowHighFiveDay" id="lowPlusOne">-00</div>
+                      <div class="todaysLowHighFiveDay" id="lowHighdash">/</div>
+                      <div class="todaysLowHighFiveDay" id="highPlusOne">00</div>
+                    </div>
+                  </div>
+                  <div class="dayPlus" id="todayPlusTwo">
+                    <div class="dayPlusName" id="dayPlusTwo">Day2</div>
+                    <img class="weather-icon fiveDayImages" id="todayPlusTwoIcon" src="https://bit.ly/webApp_Assets_cloudy">
+                    <div class="lowTempHighTempBoxFiveDay">
+                        <div class="todaysLowHighFiveDay" id="lowPlusTwo">-00</div>
+                        <div class="todaysLowHighFiveDay" id="lowHighdash">/</div>
+                        <div class="todaysLowHighFiveDay" id="highPlusTwo">00</div>
+                    </div>
+                  </div>
+                  <div class="dayPlus" id="todayPlusThree">
+                    <div class="dayPlusName" id="dayPlusThree">Day3</div>
+                    <img class="weather-icon fiveDayImages" id="todayPlusThreeIcon" src="https://bit.ly/webApp_Assets_cloudy">
+                    <div class="lowTempHighTempBoxFiveDay">
+                        <div class="todaysLowHighFiveDay" id="lowPlusThree">-00</div>
+                        <div class="todaysLowHighFiveDay" id="lowHighdash">/</div>
+                        <div class="todaysLowHighFiveDay" id="highPlusThree">00</div>
+                    </div>
+                  </div>
+                  <div class="dayPlus" id="todayPlusFour">
+                    <div class="dayPlusName" id="dayPlusFour">Day4</div>
+                    <img class="weather-icon fiveDayImages" id="todayPlusFourIcon" src="https://bit.ly/webApp_Assets_cloudy">
+                    <div class="lowTempHighTempBoxFiveDay">
+                        <div class="todaysLowHighFiveDay" id="lowPlusFour">-00</div>
+                        <div class="todaysLowHighFiveDay" id="lowHighdash">/</div>
+                        <div class="todaysLowHighFiveDay" id="highPlusFour">00</div>
+                    </div>
+                  </div>
+                  <div class="dayPlus" id="todayPlusFive">
+                    <div class="dayPlusName" id="dayPlusFive">Day5</div>
+                    <img class="weather-icon fiveDayImages" id="todayPlusFiveIcon" src="https://bit.ly/webApp_Assets_cloudy">
+                    <div class="lowTempHighTempBoxFiveDay">
+                        <div class="todaysLowHighFiveDay" id="lowPlusFive">-00</div>
+                        <div class="todaysLowHighFiveDay" id="lowHighdash">/</div>
+                        <div class="todaysLowHighFiveDay" id="highPlusFive">00</div>
+                    </div>
+                  </div> <!--#todayPlusFive-->
+                </div> <!--fiveDayForecast--> 
+              </div> <!--targetCityDisplayContainer-->
+            </div> <!--targetCitySlideContainer-->
+          </div> <!--carousel-caption-->
+        </div> <!--item-->
+      </div> <!--carousel-inner-->
+
+      <a class="carousel-control-prev" href="#targetCityCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#targetCityCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!--"targetCityCarousel" carousel-slide-->
+  </div> <!--main-container-->
+  
+  
+    
+  
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  
+
+  <!-- JAVASCRIPT -->
+  <script src="/main.js"></script>
+
+</body>
+
+</html>
